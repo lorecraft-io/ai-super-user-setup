@@ -42,7 +42,7 @@ There are five steps. Run them in order. Each one builds on the last.
 
 **[Step 2](#step-2---dev-tools)** is where you install the rest of your development tools. Things like file converters, search tools, and utilities. You run this from inside Warp after Step 1 is done. Much more straightforward.
 
-**[Step 3](#step-3---claudeflow--context-hub)** is where you set up ClaudeFlow. This is the multi-agent orchestration layer that turns Claude from a single assistant into a full team of AI agents. It also cuts your token costs by up to 75% with smart model routing. This is where everything comes together.
+**[Step 3](#step-3---claudeflow--context-hub)** is where you set up ClaudeFlow and Context Hub. ClaudeFlow is the multi-agent orchestration layer that turns Claude into a full team of AI agents. Context Hub stops Claude from hallucinating when writing code that calls APIs.
 
 **[Step 4](#step-4---design-tools)** gives Claude professional design skills and a library of production-ready UI components.
 
@@ -305,9 +305,7 @@ You'll see "MCP" mentioned here and in future steps. MCP stands for Model Contex
 
 ### After Step 3
 
-Your core setup is done. Open a new `cskip` session and try something ambitious. Ask Claude to build something, research something, or refactor something complex. You'll see ClaudeFlow kick in automatically when the task calls for it.
-
-More steps are being added below. Check back or run the update command to stay current.
+Your core tools are installed. Continue to Step 4 for design tools and Step 5 for your Second Brain. Or open a new `cskip` session and try something ambitious. ClaudeFlow kicks in automatically when the task calls for it.
 
 ---
 
@@ -453,7 +451,7 @@ Obsidian will open with an empty vault. That's perfect. Now Claude will set it u
 **Open Warp, run cskip, and paste this:**
 
 > [!IMPORTANT]
-> **macOS / Linux. Paste this into your Claude session:**
+> **Paste this into your Claude session:**
 > ```
 > run this command to set up my Second Brain vault structure: curl -fsSL https://raw.githubusercontent.com/lorecraft-io/ai-super-user-setup/main/step-5/step-5a-setup-vault.sh | bash
 > ```
@@ -485,7 +483,7 @@ Before importing your other notes, let's get your Claude conversation history in
 **Once you have the zip file, go back to your cskip session and paste this:**
 
 > [!IMPORTANT]
-> **macOS / Linux. Paste this into your Claude session:**
+> **Paste this into your Claude session:**
 > ```
 > run this command to import my Claude history into my vault: curl -fsSL https://raw.githubusercontent.com/lorecraft-io/ai-super-user-setup/main/step-5/step-5b-import-claude.sh | bash
 > ```
@@ -517,7 +515,7 @@ Now let's get the rest of your notes in. If you have notes in Apple Notes, Googl
 **Once you have your exported notes in a folder, go back to your cskip session and paste this:**
 
 > [!IMPORTANT]
-> **macOS / Linux. Paste this into your Claude session:**
+> **Paste this into your Claude session:**
 > ```
 > run this command to import my notes into my vault: curl -fsSL https://raw.githubusercontent.com/lorecraft-io/ai-super-user-setup/main/step-5/step-5c-import-notes.sh | bash
 > ```
@@ -546,7 +544,7 @@ What Claude will do:
 - **Set up the sync script.** A simple script you can run anytime to re-process your Inbox, fix broken links, and keep your vault tidy.
 
 > [!IMPORTANT]
-> **macOS / Linux. Paste this into your Claude session:**
+> **Paste this into your Claude session:**
 > ```
 > run this command to wire up my vault: curl -fsSL https://raw.githubusercontent.com/lorecraft-io/ai-super-user-setup/main/step-5/step-5d-wire-vault.sh | bash
 > ```
@@ -610,7 +608,7 @@ New steps and updates get added to this repo over time. If you've already comple
 Or if you prefer to run it directly without Claude, just paste the command into Warp on its own.
 
 > [!IMPORTANT]
-> **macOS / Linux. Paste this into your Claude session (or Warp directly):**
+> **Paste this into your Claude session (or Warp directly):**
 > ```
 > run this update command: curl -fsSL https://raw.githubusercontent.com/lorecraft-io/ai-super-user-setup/main/update.sh | bash
 > ```
