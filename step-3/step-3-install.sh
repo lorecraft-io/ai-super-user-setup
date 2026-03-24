@@ -116,7 +116,7 @@ start_daemon() {
     npx ruflo@latest daemon start 2>/dev/null || true
 
     # Daemon starts in background. Check if PID file exists as proof it launched.
-    if [ -f ".ruflo/daemon.pid" ] || npx ruflo@latest daemon status 2>/dev/null | grep -q "PID" 2>/dev/null; then
+    if [ -f ".claude-flow/daemon.pid" ] || npx ruflo@latest daemon status 2>/dev/null | grep -q "PID" 2>/dev/null; then
         success "Ruflo daemon started"
     else
         warn "Daemon may not have started. Claude will start it automatically when needed."
@@ -140,7 +140,7 @@ init_config() {
     info "Initializing Ruflo configuration..."
 
     # Only init if not already initialized
-    if [ -f ".ruflo.json" ] || [ -f "ruflo.json" ]; then
+    if [ -f ".claude-flow/config.yaml" ] || [ -f ".ruflo.json" ] || [ -f "ruflo.json" ]; then
         success "Ruflo already initialized in this directory"
         return
     fi
@@ -297,7 +297,7 @@ run_self_test() {
     fi
 
     # Daemon available
-    if [ -f ".ruflo/daemon.pid" ] || npx ruflo@latest daemon status 2>/dev/null | grep -q "PID" 2>/dev/null; then
+    if [ -f ".claude-flow/daemon.pid" ] || npx ruflo@latest daemon status 2>/dev/null | grep -q "PID" 2>/dev/null; then
         success "TEST: Ruflo daemon available"
         TEST_PASS=$((TEST_PASS + 1))
     else
@@ -323,21 +323,26 @@ run_self_test() {
         TEST_FAIL=$((TEST_FAIL + 1))
     fi
 
-    # Model set to Opus
-    MODEL_CONFIG=$(npx ruflo@latest config get --key "model.default" 2>/dev/null || echo "")
-    if echo "$MODEL_CONFIG" | grep -qi "opus" 2>/dev/null; then
+    # Model set to Opus (check config.yaml since CLI config get uses a separate runtime store)
+    if grep -q "default: opus" ".claude-flow/config.yaml" 2>/dev/null; then
         success "TEST: Model locked to Opus"
         TEST_PASS=$((TEST_PASS + 1))
     else
-        soft_fail "TEST: Model default not set to Opus"
-        TEST_FAIL=$((TEST_FAIL + 1))
+        MODEL_CONFIG=$(npx ruflo@latest config get --key "model.default" 2>/dev/null || echo "")
+        if echo "$MODEL_CONFIG" | grep -qi "opus" 2>/dev/null; then
+            success "TEST: Model locked to Opus"
+            TEST_PASS=$((TEST_PASS + 1))
+        else
+            soft_fail "TEST: Model default not set to Opus"
+            TEST_FAIL=$((TEST_FAIL + 1))
+        fi
     fi
 
-    # Memory system configured
-    if [ -f ".ruflo/config.yaml" ] && grep -q "hybrid\|memory" ".ruflo/config.yaml" 2>/dev/null; then
+    # Memory system configured (ruflo still uses .claude-flow/ directory internally)
+    if [ -f ".claude-flow/config.yaml" ] && grep -q "hybrid\|memory" ".claude-flow/config.yaml" 2>/dev/null; then
         success "TEST: Memory system configured"
         TEST_PASS=$((TEST_PASS + 1))
-    elif [ -d ".ruflo/data/memory" ] || [ -d "data/memory" ]; then
+    elif [ -d ".claude-flow/data" ] || [ -d "data/memory" ]; then
         success "TEST: Memory system configured"
         TEST_PASS=$((TEST_PASS + 1))
     else
