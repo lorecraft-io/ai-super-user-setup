@@ -479,7 +479,13 @@ Obsidian will open with an empty vault. That's perfect. Now Claude will set it u
 > run this command to set up my Second Brain vault structure: irm https://raw.githubusercontent.com/lorecraft-io/ai-super-user-setup/main/step-5/step-5a-setup-vault.ps1 | iex
 > ```
 
-Claude will ask you where your vault is located, then create all the folders, templates, and the CLAUDE.md file that teaches Claude how to work with your vault going forward.
+Claude will ask you where your vault is located, then:
+
+- Create all the Zettelkasten folders (00-Inbox through 07-Projects)
+- Drop in ready-to-use **note templates** for each note type (Fleeting, Literature, Permanent, MOC) so Claude and you always create notes in a consistent format
+- Create the **CLAUDE.md** file that teaches Claude how to work with your vault going forward (linking conventions, frontmatter standards, tagging rules, note types)
+- Set up the **WebFetch workflow** so Claude knows how to capture content from URLs into your vault (it pulls the page, creates a Literature Note, extracts permanent notes, and links everything)
+- Set up a **sync automation script** you can run later to keep things tidy
 
 ### Step 5b - Import Your Claude History
 
@@ -510,7 +516,14 @@ Before importing your other notes, let's get your Claude conversation history in
 > run this command to import my Claude history into my vault: irm https://raw.githubusercontent.com/lorecraft-io/ai-super-user-setup/main/step-5/step-5b-import-claude.ps1 | iex
 > ```
 
-Claude will ask you where the zip file is, then parse your conversations into the right vault folders. It will create project folders based on your Claude Projects, convert conversation logs into literature notes, and start building connections.
+Claude will ask you where the zip file is, then:
+
+- Parse your conversations and sort them into the right vault folders
+- Create **project folders** in `07-Projects/` based on your Claude Projects (you can name them whatever you want, Claude will ask)
+- Generate a **project index note** for each project with a knowledge base summary and conversation log links
+- Convert conversation highlights into **literature notes** in `02-Literature/`
+- Extract key concepts into **permanent notes** in `03-Permanent/`
+- Start building **bidirectional links** between related projects and notes
 
 ### Step 5c - Import Your Existing Notes
 
@@ -544,7 +557,12 @@ Now let's get the rest of your notes in. If you have notes in Apple Notes, Googl
 > run this command to import my notes into my vault: irm https://raw.githubusercontent.com/lorecraft-io/ai-super-user-setup/main/step-5/step-5c-import-notes.ps1 | iex
 > ```
 
-Claude will ask you where your exported notes are, what format they're in, and then convert and organize them into your vault. It will handle file conversion (docx, pptx, xlsx, html all get converted to markdown), catch any corrupt files, and move everything into the Inbox for processing.
+Claude will ask you where your exported notes are, what format they're in, and then:
+
+- **Convert files to markdown** using Pandoc (installed in Step 2). This handles Word docs (.docx), PowerPoint (.pptx), Excel spreadsheets (.xlsx), and HTML files. Everything becomes clean, linkable markdown.
+- **Validate every file.** Claude checks for corrupt, empty, or fake files (like a .pdf that's actually an empty text file) and flags them.
+- **Move everything into the Inbox** for processing in Step 5d.
+- **Ask you how you want to organize things.** Claude will have a conversation with you about what folders make sense for your notes, what categories you care about, and how you want things grouped. This isn't one-size-fits-all. Your vault should reflect how your brain works.
 
 ### Step 5d - Wire It All Up
 
@@ -552,11 +570,14 @@ This is where the magic happens. Claude goes through everything in your vault an
 
 What Claude will do:
 - **Process your Inbox.** Sort raw captures into Fleeting, Literature, or Permanent notes based on what they are.
-- **Create wikilinks.** Find related concepts across your notes and link them together with `[[wikilinks]]`.
-- **Fix bidirectional links.** Make sure if Note A links to Note B, Note B also links back to Note A.
-- **Build Maps of Content.** Create MOC index notes that group related permanent notes by topic.
-- **Convert tables to bullet lists.** Obsidian's graph doesn't see links inside tables, so Claude converts them for better connectivity.
-- **Validate files.** Catch any corrupt, empty, or misplaced files.
+- **Create wikilinks.** Find related concepts across your notes and link them together with `[[wikilinks]]`. Claude looks at every note and asks "what else in this vault relates to this?" Then it creates the links.
+- **Fix bidirectional links.** Make sure if Note A links to Note B, Note B also links back to Note A. This is critical for the graph to work properly.
+- **Build Maps of Content.** Create MOC index notes that group related permanent notes by topic. These are like tables of contents for different areas of your knowledge.
+- **Create project index notes.** Each project in `07-Projects/` gets an index note with a summary, knowledge base links, and conversation log references.
+- **Convert tables to bullet lists.** Obsidian's graph view doesn't detect wikilinks that are inside markdown tables. Claude converts them to bullet lists so every link shows up in the graph.
+- **Validate files.** Catch any corrupt, empty, or misplaced files and flag them for you.
+- **Add frontmatter.** Every note gets proper YAML frontmatter (title, date, type, tags, source, related) so Obsidian can filter and search them.
+- **Set up the sync script.** A simple script you can run anytime to re-process your Inbox, fix broken links, and keep your vault tidy.
 
 > [!IMPORTANT]
 > **macOS / Linux. Paste this into your Claude session:**
