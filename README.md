@@ -4,17 +4,19 @@ Everything you need to start working with AI-powered development tools, installe
 
 ## How It Works
 
-**Script 0** sets up your machine with all the foundational tools — things like Node.js, Python, Git, and file converters. These are the building blocks that everything else depends on. It also installs Warp Terminal and Claude Code, the AI coding assistant you'll be using.
+There are three scripts. Run them in order — each one builds on the last.
 
-**Script 1** *(coming soon)* builds on top of Script 0 by setting up ClaudeFlow — the multi-agent orchestration layer that makes Claude Code dramatically more powerful. It can't run without the tools Script 0 installs, which is why Script 0 comes first.
+**Script 0** gets the bare essentials on your machine — just enough to get Claude Code (your AI assistant) and Warp Terminal (your new terminal) up and running. This is the fastest script. It needs to run first because everything else depends on it.
 
-Run them in order. Each one is a single command you paste into your terminal.
+**Script 1** installs the rest of your development tools — file converters, search tools, and utilities that Claude will use when working on your projects. You run this from inside Warp after Script 0 is done.
+
+**Script 2** *(coming soon)* sets up ClaudeFlow — the multi-agent orchestration layer that makes Claude dramatically more powerful.
 
 ---
 
-## Script 0 — Environment Setup
+## Script 0 — Get Claude Running
 
-Sets up your machine with 16 essential tools. Detects your operating system automatically, skips anything you already have, and installs everything else.
+Installs the minimum needed to get Claude Code working on your machine. Detects your operating system automatically.
 
 ### macOS / Linux
 
@@ -39,17 +41,7 @@ irm https://raw.githubusercontent.com/lorecraft-io/ai-super-user-setup/main/scri
 | Homebrew (Mac) / winget (Win) | Installs other software for you |
 | Git | Tracks and manages code changes |
 | Node.js (v18+) | Runs JavaScript — needed for Claude Code |
-| Python 3 + pip | Runs Python scripts and tools |
-| Pandoc | Converts documents (Word, PowerPoint → text) |
-| xlsx2csv | Converts spreadsheets to readable format |
-| pdftotext | Extracts text from PDFs |
-| jq | Reads and edits config files |
-| ripgrep | Searches code fast — used by Claude Code |
-| GitHub CLI | Manage GitHub from your terminal |
-| tree | Shows folder structure visually |
-| fzf | Find files and commands quickly |
-| wget | Downloads files from the web |
-| Warp Terminal | Modern terminal with Shift+Tab permissions toggle |
+| Warp Terminal | Your new terminal (see below) |
 | Claude Code | AI coding assistant |
 
 ### Why Warp Terminal?
@@ -60,13 +52,13 @@ Script 0 installs [Warp](https://www.warp.dev) as your terminal. Here's why:
 - **Built for AI workflows** — Warp is designed around working with AI in the terminal. It handles long-running output, code blocks, and multi-step processes better than a standard terminal.
 - **Works on Mac, Linux, and Windows** — Same experience everywhere.
 
-After Script 0 finishes, **open Warp and run all future scripts from there.** You can keep using your old terminal for other things, but Warp is where Claude works best.
+After Script 0 finishes, **close your old terminal and open Warp.** Everything from here on happens in Warp.
 
 ### After Script 0
 
 #### 1. Open Warp
 
-Close your current terminal. Open **Warp** (it was just installed).
+Open **Warp** (it was just installed by Script 0).
 
 - Warp will ask you to create an account — go ahead and sign up. **The free plan is all you need.** No payment required for Warp.
 
@@ -74,11 +66,13 @@ Close your current terminal. Open **Warp** (it was just installed).
 
 Before doing anything else, change one setting:
 
-1. Open Warp settings (Cmd+Comma on Mac, Ctrl+Comma on Windows/Linux)
+1. Open Warp settings (**Cmd+Comma** on Mac, **Ctrl+Comma** on Windows/Linux)
 2. Go to **Features**
 3. The very first setting is **Default Mode** — make sure it's set to **Terminal**, not Agent
 
 This keeps Warp acting as a normal terminal so Claude Code runs properly.
+
+> **If you see "Agent Oz" instead of a terminal:** Press the **Esc** key. This switches you back to the normal terminal view. That's also why we changed the default to Terminal — so this doesn't keep happening.
 
 #### 3. Claude Code Subscription
 
@@ -114,15 +108,58 @@ If you see a version number, you're set. Move on to Script 1.
 
 ---
 
-## Script 1 — ClaudeFlow Setup *(coming soon)*
+## Script 1 — Dev Tools
 
-Installs and configures ClaudeFlow, the multi-agent orchestration system that coordinates multiple AI agents to work on complex tasks together. Requires Script 0 to be completed first.
+Installs the development tools that Claude uses when working on your projects — file converters, search tools, and utilities. You run this in Warp using `cskip` (auto-approve mode).
+
+### Why auto-approve mode?
+
+When Claude runs in normal mode, it asks your permission before every single action — every file it reads, every command it runs. During a setup script that installs 10+ tools, that means dozens of approval prompts. There's no sound or notification when Claude is waiting for you, so if you look away for a moment, the whole process just sits there frozen until you come back and type "y".
+
+**Auto-approve mode (`cskip`) lets Claude run without stopping to ask.** It will install everything in one smooth pass. You can watch it work in real time — you just don't have to babysit it.
+
+You can always switch back to normal mode later for regular work. This is just for setup.
+
+### Run Script 1
+
+In Warp, paste:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/lorecraft-io/ai-super-user-setup/main/script-1/script-1-install.sh | bash
+```
+
+**Windows** — in Warp or PowerShell:
+
+```powershell
+irm https://raw.githubusercontent.com/lorecraft-io/ai-super-user-setup/main/script-1/script-1-install.ps1 | iex
+```
+
+### What Script 1 Installs
+
+| Tool | What it does |
+|------|-------------|
+| Python 3 + pip | Runs Python scripts and tools |
+| Pandoc | Converts documents (Word, PowerPoint → text) |
+| xlsx2csv | Converts spreadsheets to readable format |
+| pdftotext | Extracts text from PDFs |
+| jq | Reads and edits config files |
+| ripgrep | Searches code fast — used by Claude Code |
+| GitHub CLI | Manage GitHub from your terminal |
+| tree | Shows folder structure visually |
+| fzf | Find files and commands quickly |
+| wget | Downloads files from the web |
+
+---
+
+## Script 2 — ClaudeFlow Setup *(coming soon)*
+
+Installs and configures ClaudeFlow, the multi-agent orchestration system that coordinates multiple AI agents to work on complex tasks together. Requires Scripts 0 and 1 to be completed first.
 
 ---
 
 ## [Cheat Sheet](CHEATSHEET.md)
 
-Quick reference for launching Claude, useful commands, and tips. **Read this after running Script 0.**
+Quick reference for terminal basics, launching Claude, useful commands, and tips. **Read this after running Script 0** — especially if you're new to working in a terminal.
 
 ---
 
