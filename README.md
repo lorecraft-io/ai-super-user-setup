@@ -1,10 +1,10 @@
-# Client Setup
+# AI Superuser Setup
 
 Everything you need to start working with AI-powered development tools, installed in the right order with one command per step.
 
 ## How It Works
 
-**Script 0** sets up your machine with all the foundational tools — things like Node.js, Python, Git, and file converters. These are the building blocks that everything else depends on. It also installs Claude Code, the AI coding assistant you'll be using.
+**Script 0** sets up your machine with all the foundational tools — things like Node.js, Python, Git, and file converters. These are the building blocks that everything else depends on. It also installs Warp Terminal and Claude Code, the AI coding assistant you'll be using.
 
 **Script 1** *(coming soon)* builds on top of Script 0 by setting up ClaudeFlow — the multi-agent orchestration layer that makes Claude Code dramatically more powerful. It can't run without the tools Script 0 installs, which is why Script 0 comes first.
 
@@ -14,14 +14,14 @@ Run them in order. Each one is a single command you paste into your terminal.
 
 ## Script 0 — Environment Setup
 
-Sets up your machine with 15 essential development tools. Detects your operating system automatically, skips anything you already have, and installs everything else.
+Sets up your machine with 16 essential tools. Detects your operating system automatically, skips anything you already have, and installs everything else.
 
 ### macOS / Linux
 
 Open Terminal and paste:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/lorecraft-io/client-setup/main/script-0/script-0-install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/lorecraft-io/ai-superuser-setup/main/script-0/script-0-install.sh | bash
 ```
 
 ### Windows
@@ -29,7 +29,7 @@ curl -fsSL https://raw.githubusercontent.com/lorecraft-io/client-setup/main/scri
 Open PowerShell and paste:
 
 ```powershell
-irm https://raw.githubusercontent.com/lorecraft-io/client-setup/main/script-0/script-0-install.ps1 | iex
+irm https://raw.githubusercontent.com/lorecraft-io/ai-superuser-setup/main/script-0/script-0-install.ps1 | iex
 ```
 
 ### What Script 0 Installs
@@ -70,18 +70,15 @@ Installs and configures ClaudeFlow, the multi-agent orchestration system that co
 
 ---
 
----
-
 ## [Cheat Sheet](CHEATSHEET.md)
 
 Quick reference for launching Claude, useful commands, and tips. **Read this after running Script 0.**
 
 ---
 
-## Requirements
+## Before You Start
 
-- **macOS** 11+ (Big Sur or later)
-- **Linux** Ubuntu 20.04+ / Debian 11+ / Fedora 36+
-- **Windows** 10 (1709+) or 11
-- Internet connection
-- Do **not** run as root or admin
+- Your computer needs to be from roughly **2020 or later** (macOS Big Sur+, Windows 10+, or a recent Linux)
+- You need an **internet connection** — the script downloads everything live
+- **Don't run it as admin/root** — just open your terminal normally and paste the command
+- If anything is already installed on your machine, the script will skip it automatically
