@@ -291,6 +291,100 @@ install_claude_code() {
 }
 
 # -----------------------------------------------------------------------------
+# Self-test — verify everything actually works
+# -----------------------------------------------------------------------------
+run_self_test() {
+    echo ""
+    echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    echo -e "${BLUE}  Running Self-Test${NC}"
+    echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    echo ""
+
+    TEST_PASS=0
+    TEST_FAIL=0
+
+    # Git
+    if command -v git &>/dev/null; then
+        success "TEST: git — $(git --version)"
+        TEST_PASS=$((TEST_PASS + 1))
+    else
+        soft_fail "TEST: git — not found"
+        TEST_FAIL=$((TEST_FAIL + 1))
+    fi
+
+    # Node
+    if command -v node &>/dev/null; then
+        NODE_MAJOR=$(node -v | sed 's/v//' | cut -d. -f1)
+        if [ "$NODE_MAJOR" -ge 18 ]; then
+            success "TEST: node $(node -v) — meets v18+ requirement"
+            TEST_PASS=$((TEST_PASS + 1))
+        else
+            soft_fail "TEST: node $(node -v) — too old, need v18+"
+            TEST_FAIL=$((TEST_FAIL + 1))
+        fi
+    else
+        soft_fail "TEST: node — not found"
+        TEST_FAIL=$((TEST_FAIL + 1))
+    fi
+
+    # npm
+    if command -v npm &>/dev/null; then
+        success "TEST: npm v$(npm -v)"
+        TEST_PASS=$((TEST_PASS + 1))
+    else
+        soft_fail "TEST: npm — not found"
+        TEST_FAIL=$((TEST_FAIL + 1))
+    fi
+
+    # Warp
+    if [ "$OS" = "mac" ]; then
+        if [ -d "/Applications/Warp.app" ]; then
+            success "TEST: Warp Terminal — installed"
+            TEST_PASS=$((TEST_PASS + 1))
+        else
+            soft_fail "TEST: Warp Terminal — not found in /Applications"
+            TEST_FAIL=$((TEST_FAIL + 1))
+        fi
+    else
+        if command -v warp-terminal &>/dev/null; then
+            success "TEST: Warp Terminal — installed"
+            TEST_PASS=$((TEST_PASS + 1))
+        else
+            soft_fail "TEST: Warp Terminal — not found"
+            TEST_FAIL=$((TEST_FAIL + 1))
+        fi
+    fi
+
+    # Claude Code
+    if command -v claude &>/dev/null; then
+        success "TEST: claude — $(claude --version 2>/dev/null || echo 'found')"
+        TEST_PASS=$((TEST_PASS + 1))
+    else
+        soft_fail "TEST: claude — not found"
+        TEST_FAIL=$((TEST_FAIL + 1))
+    fi
+
+    # cskip alias in shell config
+    if grep -q 'alias cskip' "$SHELL_RC" 2>/dev/null; then
+        success "TEST: cskip shortcut — configured in $SHELL_RC"
+        TEST_PASS=$((TEST_PASS + 1))
+    else
+        soft_fail "TEST: cskip shortcut — not found in $SHELL_RC"
+        TEST_FAIL=$((TEST_FAIL + 1))
+    fi
+
+    echo ""
+    if [ "$TEST_FAIL" -eq 0 ]; then
+        echo -e "  ${GREEN}All $TEST_PASS tests passed.${NC}"
+    else
+        echo -e "  ${GREEN}$TEST_PASS passed${NC}, ${RED}$TEST_FAIL failed${NC}."
+        echo -e "  ${YELLOW}Scroll up to see what went wrong. You may need to fix these before continuing.${NC}"
+    fi
+    echo ""
+    echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+}
+
+# -----------------------------------------------------------------------------
 # Next steps
 # -----------------------------------------------------------------------------
 show_next_steps() {
@@ -366,6 +460,13 @@ main() {
     echo -e "${BLUE}  5 tools • macOS + Linux${NC}"
     echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
     echo ""
+    echo -e "  ${YELLOW}Note: This script installs everything automatically, but${NC}"
+    echo -e "  ${YELLOW}the steps AFTER it finishes (Warp setup, Claude login) are${NC}"
+    echo -e "  ${YELLOW}manual. Claude won't be helping in your terminal yet —${NC}"
+    echo -e "  ${YELLOW}that starts after you complete the setup steps below.${NC}"
+    echo -e "  ${YELLOW}It should be smooth, but if something goes wrong, check${NC}"
+    echo -e "  ${YELLOW}the test results at the end of this script.${NC}"
+    echo ""
 
     detect_os
     preflight_checks
@@ -376,6 +477,7 @@ main() {
     install_node
     install_warp
     install_claude_code
+    run_self_test
     print_summary
     show_next_steps
 }

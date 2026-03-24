@@ -348,6 +348,60 @@ install_wget() {
 }
 
 # -----------------------------------------------------------------------------
+# Self-test
+# -----------------------------------------------------------------------------
+run_self_test() {
+    echo ""
+    echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    echo -e "${BLUE}  Running Self-Test${NC}"
+    echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    echo ""
+
+    TEST_PASS=0
+    TEST_FAIL=0
+
+    for cmd_check in \
+        "python3:Python 3" \
+        "pandoc:Pandoc" \
+        "pdftotext:pdftotext" \
+        "jq:jq" \
+        "rg:ripgrep" \
+        "gh:GitHub CLI" \
+        "tree:tree" \
+        "fzf:fzf" \
+        "wget:wget"; do
+        cmd="${cmd_check%%:*}"
+        name="${cmd_check##*:}"
+        if command -v "$cmd" &>/dev/null; then
+            success "TEST: $name — installed"
+            TEST_PASS=$((TEST_PASS + 1))
+        else
+            soft_fail "TEST: $name — not found"
+            TEST_FAIL=$((TEST_FAIL + 1))
+        fi
+    done
+
+    # xlsx2csv (Python import check)
+    if python3 -c "import xlsx2csv" &>/dev/null 2>&1; then
+        success "TEST: xlsx2csv — installed"
+        TEST_PASS=$((TEST_PASS + 1))
+    else
+        soft_fail "TEST: xlsx2csv — not found"
+        TEST_FAIL=$((TEST_FAIL + 1))
+    fi
+
+    echo ""
+    if [ "$TEST_FAIL" -eq 0 ]; then
+        echo -e "  ${GREEN}All $TEST_PASS tests passed.${NC}"
+    else
+        echo -e "  ${GREEN}$TEST_PASS passed${NC}, ${RED}$TEST_FAIL failed${NC}."
+        echo -e "  ${YELLOW}Scroll up to see what went wrong.${NC}"
+    fi
+    echo ""
+    echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+}
+
+# -----------------------------------------------------------------------------
 # Summary
 # -----------------------------------------------------------------------------
 print_summary() {
@@ -402,6 +456,7 @@ main() {
     install_tree
     install_fzf
     install_wget
+    run_self_test
     print_summary
 }
 

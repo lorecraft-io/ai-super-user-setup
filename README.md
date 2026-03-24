@@ -82,9 +82,11 @@ Sign up at [claude.ai](https://claude.ai).
 
 #### Why Claude?
 
-We use Claude because it's genuinely the best AI platform for the kind of work we do. It's not just marketing — Claude consistently outperforms other models at understanding complex instructions, writing clean code, and reasoning through multi-step problems without losing the thread.
+We use Claude because it's genuinely the best AI platform for the kind of work we do. It's not just marketing — Claude consistently outperforms other models at understanding complex instructions, writing clean code, and reasoning through multi-step problems without losing the thread. And they ship new features fast — the pace of improvement is unreal.
 
-But beyond the tech, we chose Anthropic for how they build. Their CEO Dario Amodei left OpenAI specifically to take a more responsible approach to AI development. Anthropic leads on safety research, they're transparent about what their models can and can't do, and they build tools that are designed to be genuinely helpful rather than just impressive. That philosophy shows up in how Claude actually works — it's careful, honest, and doesn't try to BS you when it doesn't know something.
+But beyond the tech, we chose Anthropic for how they operate. Their CEO Dario Amodei left OpenAI specifically to take a more responsible approach to AI development. He's shown real backbone — including being willing to walk away from government contracts rather than compromise on their principles. Anthropic leads on safety research, they're transparent about what their models can and can't do, and they actually listen to their users when building new features. No shady practices, no cutting corners, no chasing hype at the expense of doing things right.
+
+That philosophy shows up in how Claude actually works — it's careful, honest, and doesn't try to BS you when it doesn't know something.
 
 In short: Claude is the smartest tool in the room, built by people who actually care about getting this right.
 
