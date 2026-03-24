@@ -84,12 +84,15 @@ This keeps Warp acting as a normal terminal so Claude Code runs properly.
 
 Claude Code requires a paid Anthropic account. The install is free, but to actually use it you'll need one of these:
 
-| Plan | Cost | Best for |
-|------|------|----------|
-| **Claude Pro** | $20/month | Most people — solid usage for day-to-day work |
-| **Claude Max** | $100/month | Heavy usage, long sessions, complex projects |
+| Plan | Cost | What you get |
+|------|------|-------------|
+| **Claude Pro** | $20/month | Good for getting started. Handles everyday tasks — writing code, editing files, answering questions. You'll hit usage limits if you run long sessions or do heavy back-to-back work. |
+| **Claude Max 5x** | $100/month | 5x the usage of Pro. Best for people who use Claude throughout the day or run multi-step workflows. You can work for hours without hitting a wall. |
+| **Claude Max 20x** | $200/month | 20x the usage of Pro. For power users running complex, long-running tasks — things like full codebase refactors, multi-agent swarms, or all-day sessions. Virtually unlimited for most people. |
 
-Sign up at [claude.ai](https://claude.ai) if you don't already have an account. We recommend **Claude Pro** to start — you can always upgrade later if you need more.
+**Our recommendation:** Start with **Pro** ($20/month). If you find yourself getting rate-limited or waiting for usage to reset, upgrade to Max. You'll know pretty quickly which tier fits your workflow.
+
+Sign up at [claude.ai](https://claude.ai) if you don't already have an account.
 
 #### 4. Log in to Claude Code
 
