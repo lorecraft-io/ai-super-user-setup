@@ -290,7 +290,33 @@ function Install-Wget {
 }
 
 # ==========================================================================
-# 15. Claude Code
+# 15. Warp Terminal
+# ==========================================================================
+function Install-Warp {
+    # Check if Warp is installed
+    $warpPath = "$env:LOCALAPPDATA\Programs\Warp\Warp.exe"
+    if (Test-Path $warpPath) {
+        Write-Ok "Warp Terminal already installed"
+        return
+    }
+    if (Get-Command warp -ErrorAction SilentlyContinue) {
+        Write-Ok "Warp Terminal already installed"
+        return
+    }
+
+    Write-Info "Installing Warp Terminal..."
+    winget install --id Warp.Warp --accept-source-agreements --accept-package-agreements --silent 2>$null
+    Refresh-Path
+
+    if ((Test-Path $warpPath) -or (Get-Command warp -ErrorAction SilentlyContinue)) {
+        Write-Ok "Warp Terminal installed — use Shift+Tab to toggle Claude permissions"
+    } else {
+        Write-SoftFail "Warp Terminal installation failed — install manually: https://www.warp.dev"
+    }
+}
+
+# ==========================================================================
+# 16. Claude Code
 # ==========================================================================
 function Install-ClaudeCode {
     if (Get-Command claude -ErrorAction SilentlyContinue) {
@@ -392,6 +418,7 @@ function Show-Summary {
         @("tree",       { "built-in" }),
         @("fzf",        { fzf --version 2>$null }),
         @("wget",       { if (Get-Command wget.exe -EA Silent) { "installed" } else { $null } }),
+        @("Warp",       { if ((Test-Path "$env:LOCALAPPDATA\Programs\Warp\Warp.exe") -or (Get-Command warp -EA Silent)) { "installed" } else { $null } }),
         @("Claude Code",{ claude --version 2>$null })
     )
 
@@ -429,7 +456,7 @@ function Main {
     Write-Host ""
     Write-Host "  ==========================================================" -ForegroundColor Blue
     Write-Host "    Script 0 - Client Environment Setup (Windows)" -ForegroundColor Blue
-    Write-Host "    15 tools - Windows 10/11" -ForegroundColor Blue
+    Write-Host "    16 tools - Windows 10/11" -ForegroundColor Blue
     Write-Host "  ==========================================================" -ForegroundColor Blue
     Write-Host ""
 
@@ -447,6 +474,7 @@ function Main {
     Install-Tree
     Install-Fzf
     Install-Wget
+    Install-Warp
     Install-ClaudeCode
     Show-AuthPrompt
     Show-Summary

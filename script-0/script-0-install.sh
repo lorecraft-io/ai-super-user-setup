@@ -500,7 +500,51 @@ install_wget() {
 }
 
 # -----------------------------------------------------------------------------
-# 17. Claude Code
+# 17. Warp Terminal
+# -----------------------------------------------------------------------------
+install_warp() {
+    # Check if Warp is already installed
+    if [ "$OS" = "mac" ]; then
+        if [ -d "/Applications/Warp.app" ]; then
+            success "Warp Terminal already installed"
+            return
+        fi
+    else
+        if command -v warp-terminal &>/dev/null; then
+            success "Warp Terminal already installed"
+            return
+        fi
+    fi
+
+    info "Installing Warp Terminal..."
+    if [ "$OS" = "mac" ]; then
+        brew install --cask warp || { soft_fail "Warp Terminal installation failed"; return; }
+    else
+        # Linux — download .deb or .rpm
+        if command -v apt-get &>/dev/null; then
+            curl -fsSL https://releases.warp.dev/stable/v0.2025.03.18.08.02.stable_05/warp-terminal_0.2025.03.18.08.02.stable.05_amd64.deb -o /tmp/warp.deb 2>/dev/null
+            if [ -f /tmp/warp.deb ]; then
+                sudo apt-get install -y -qq /tmp/warp.deb || { soft_fail "Warp Terminal installation failed — install manually: https://www.warp.dev"; return; }
+                rm -f /tmp/warp.deb
+            else
+                soft_fail "Warp Terminal download failed — install manually: https://www.warp.dev"
+                return
+            fi
+        elif command -v dnf &>/dev/null; then
+            sudo rpm --import https://releases.warp.dev/linux/keys/warp.asc 2>/dev/null
+            sudo dnf install -y https://releases.warp.dev/stable/v0.2025.03.18.08.02.stable_05/warp-terminal-0.2025.03.18.08.02.stable.05-1.x86_64.rpm 2>/dev/null \
+                || { soft_fail "Warp Terminal installation failed — install manually: https://www.warp.dev"; return; }
+        else
+            soft_fail "Could not install Warp Terminal — install manually: https://www.warp.dev"
+            return
+        fi
+    fi
+
+    success "Warp Terminal installed — use Shift+Tab to toggle Claude permissions"
+}
+
+# -----------------------------------------------------------------------------
+# 18. Claude Code
 # -----------------------------------------------------------------------------
 install_claude_code() {
     if command -v claude &>/dev/null; then
@@ -597,6 +641,11 @@ print_summary() {
     echo "    tree           $(command -v tree &>/dev/null && echo 'installed' || echo '—')"
     echo "    fzf            $(fzf --version 2>/dev/null | cut -d' ' -f1 || echo '—')"
     echo "    wget           $(command -v wget &>/dev/null && echo 'installed' || echo '—')"
+    if [ "$OS" = "mac" ]; then
+    echo "    Warp Terminal  $([ -d '/Applications/Warp.app' ] && echo 'installed' || echo '—')"
+    else
+    echo "    Warp Terminal  $(command -v warp-terminal &>/dev/null && echo 'installed' || echo '—')"
+    fi
     echo "    Claude Code    $(claude --version 2>/dev/null || echo '—')"
     echo ""
     if [ "$ERRORS" -gt 0 ]; then
@@ -618,7 +667,7 @@ main() {
     echo ""
     echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
     echo -e "${BLUE}  Script 0 — Client Environment Setup${NC}"
-    echo -e "${BLUE}  15 tools • macOS + Linux${NC}"
+    echo -e "${BLUE}  16 tools • macOS + Linux${NC}"
     echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
     echo ""
 
@@ -639,6 +688,7 @@ main() {
     install_tree
     install_fzf
     install_wget
+    install_warp
     install_claude_code
     verify_claude_auth
     print_summary

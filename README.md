@@ -21,7 +21,7 @@ Sets up your machine with 15 essential development tools. Detects your operating
 Open Terminal and paste:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/lorecraft-io/client-setup/main/script-0-install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/lorecraft-io/client-setup/main/script-0/script-0-install.sh | bash
 ```
 
 ### Windows
@@ -29,7 +29,7 @@ curl -fsSL https://raw.githubusercontent.com/lorecraft-io/client-setup/main/scri
 Open PowerShell and paste:
 
 ```powershell
-irm https://raw.githubusercontent.com/lorecraft-io/client-setup/main/script-0-install.ps1 | iex
+irm https://raw.githubusercontent.com/lorecraft-io/client-setup/main/script-0/script-0-install.ps1 | iex
 ```
 
 ### What Script 0 Installs
@@ -49,6 +49,7 @@ irm https://raw.githubusercontent.com/lorecraft-io/client-setup/main/script-0-in
 | tree | Shows folder structure visually |
 | fzf | Find files and commands quickly |
 | wget | Downloads files from the web |
+| Warp Terminal | Modern terminal with Shift+Tab permissions toggle |
 | Claude Code | AI coding assistant |
 
 ### After Script 0
@@ -66,6 +67,14 @@ This opens a browser — sign in with your Anthropic account. Once that's done, 
 ## Script 1 — ClaudeFlow Setup *(coming soon)*
 
 Installs and configures ClaudeFlow, the multi-agent orchestration system that coordinates multiple AI agents to work on complex tasks together. Requires Script 0 to be completed first.
+
+---
+
+---
+
+## [Cheat Sheet](CHEATSHEET.md)
+
+Quick reference for launching Claude, useful commands, and tips. **Read this after running Script 0.**
 
 ---
 
