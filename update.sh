@@ -2,7 +2,7 @@
 set -uo pipefail
 
 # =============================================================================
-# AI Super User Setup — Update
+# AI Super Setup — Update
 # Re-runs all steps, skips anything already installed, picks up anything new.
 # Usage: curl -fsSL <hosted-url>/update.sh | bash
 # =============================================================================
@@ -13,11 +13,11 @@ YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m'
 
-BASE_URL="https://raw.githubusercontent.com/lorecraft-io/ai-super-user-setup/main"
+BASE_URL="https://raw.githubusercontent.com/lorecraft-io/ai-super-setup/main"
 
 echo ""
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-echo -e "${BLUE}  AI Super User Setup — Update${NC}"
+echo -e "${BLUE}  AI Super Setup — Update${NC}"
 echo -e "${BLUE}  Running all steps, skipping what's already installed${NC}"
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 echo ""

@@ -1,4 +1,4 @@
-# AI Super User Setup
+# AI Super Setup
 
 Everything you need to start working with AI-powered development tools, installed in the right order with one command per step.
 
@@ -90,7 +90,7 @@ This step is the foundation. It installs the minimum needed to get Claude Code w
 > [!IMPORTANT]
 > **Copy and paste this into Terminal, then hit Enter:**
 > ```bash
-> curl -fsSL https://raw.githubusercontent.com/lorecraft-io/ai-super-user-setup/main/step-1/step-1-install.sh | bash
+> curl -fsSL https://raw.githubusercontent.com/lorecraft-io/ai-super-setup/main/step-1/step-1-install.sh | bash
 > ```
 
 ### What This Step Installs
@@ -210,7 +210,7 @@ Once you're inside the Claude session, paste this and hit Enter:
 > [!IMPORTANT]
 > **Paste this into your Claude session:**
 > ```
-> run this command to install my dev tools: curl -fsSL https://raw.githubusercontent.com/lorecraft-io/ai-super-user-setup/main/step-2/step-2-install.sh | bash
+> run this command to install my dev tools: curl -fsSL https://raw.githubusercontent.com/lorecraft-io/ai-super-setup/main/step-2/step-2-install.sh | bash
 > ```
 
 
@@ -283,7 +283,7 @@ Once you're inside the Claude session, paste this and hit Enter:
 > [!IMPORTANT]
 > **Paste this into your Claude session:**
 > ```
-> run this command to set up Ruflo and Context Hub: curl -fsSL https://raw.githubusercontent.com/lorecraft-io/ai-super-user-setup/main/step-3/step-3-install.sh | bash
+> run this command to set up Ruflo and Context Hub: curl -fsSL https://raw.githubusercontent.com/lorecraft-io/ai-super-setup/main/step-3/step-3-install.sh | bash
 > ```
 
 
@@ -357,7 +357,7 @@ Once you're inside the Claude session, paste this and hit Enter:
 > [!IMPORTANT]
 > **Paste this into your Claude session:**
 > ```
-> run this command to install design tools: curl -fsSL https://raw.githubusercontent.com/lorecraft-io/ai-super-user-setup/main/step-4/step-4-install.sh | bash
+> run this command to install design tools: curl -fsSL https://raw.githubusercontent.com/lorecraft-io/ai-super-setup/main/step-4/step-4-install.sh | bash
 > ```
 
 
@@ -456,7 +456,7 @@ Obsidian will open with an empty vault. That's perfect. Now Claude will set it u
 > [!IMPORTANT]
 > **Paste this into your Claude session:**
 > ```
-> run this command to set up my Second Brain vault structure: curl -fsSL https://raw.githubusercontent.com/lorecraft-io/ai-super-user-setup/main/step-5/step-5a-setup-vault.sh | bash
+> run this command to set up my Second Brain vault structure: curl -fsSL https://raw.githubusercontent.com/lorecraft-io/ai-super-setup/main/step-5/step-5a-setup-vault.sh | bash
 > ```
 
 
@@ -488,7 +488,7 @@ Before importing your other notes, let's get your Claude conversation history in
 > [!IMPORTANT]
 > **Paste this into your Claude session:**
 > ```
-> run this command to import my Claude history into my vault: curl -fsSL https://raw.githubusercontent.com/lorecraft-io/ai-super-user-setup/main/step-5/step-5b-import-claude.sh | bash
+> run this command to import my Claude history into my vault: curl -fsSL https://raw.githubusercontent.com/lorecraft-io/ai-super-setup/main/step-5/step-5b-import-claude.sh | bash
 > ```
 
 
@@ -520,7 +520,7 @@ Now let's get the rest of your notes in. If you have notes in Apple Notes, Googl
 > [!IMPORTANT]
 > **Paste this into your Claude session:**
 > ```
-> run this command to import my notes into my vault: curl -fsSL https://raw.githubusercontent.com/lorecraft-io/ai-super-user-setup/main/step-5/step-5c-import-notes.sh | bash
+> run this command to import my notes into my vault: curl -fsSL https://raw.githubusercontent.com/lorecraft-io/ai-super-setup/main/step-5/step-5c-import-notes.sh | bash
 > ```
 
 
@@ -549,7 +549,7 @@ What Claude will do:
 > [!IMPORTANT]
 > **Paste this into your Claude session:**
 > ```
-> run this command to wire up my vault: curl -fsSL https://raw.githubusercontent.com/lorecraft-io/ai-super-user-setup/main/step-5/step-5d-wire-vault.sh | bash
+> run this command to wire up my vault: curl -fsSL https://raw.githubusercontent.com/lorecraft-io/ai-super-setup/main/step-5/step-5d-wire-vault.sh | bash
 > ```
 
 
@@ -627,7 +627,7 @@ Once you're inside the Claude session, paste this and hit Enter:
 > [!IMPORTANT]
 > **Paste this into your Claude session:**
 > ```
-> run this command to install visual media tools: curl -fsSL https://raw.githubusercontent.com/lorecraft-io/ai-super-user-setup/main/step-6/step-6-install.sh | bash
+> run this command to install visual media tools: curl -fsSL https://raw.githubusercontent.com/lorecraft-io/ai-super-setup/main/step-6/step-6-install.sh | bash
 > ```
 
 
@@ -663,7 +663,7 @@ Open Warp and run `cskip` to start a Claude session, then paste the update comma
 > [!IMPORTANT]
 > **Paste this into your Claude session (or Warp directly):**
 > ```
-> run this update command: curl -fsSL https://raw.githubusercontent.com/lorecraft-io/ai-super-user-setup/main/update.sh | bash
+> run this update command: curl -fsSL https://raw.githubusercontent.com/lorecraft-io/ai-super-setup/main/update.sh | bash
 > ```
 
 
